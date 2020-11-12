@@ -105,9 +105,10 @@ The project will be available at **127.0.0.1:8000**.
 ### More
 
 #### For static url setting
-Can refer the end of the setting.py
+Please refer the end of the setting.py
 
 #### For production:
 
-1. Set DEBUGE=False in setting.py
-2. Follow the [document](https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/) for serving static files 
+1. For security, you should create your own Django project from zero to get your own **SECRET_KEY** in setting.py
+2. Set **DEBUGE=False** in setting.py
+3. Follow the [document](https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/) for serving static files
