@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chatbot Demo</title>
+    {% load static %}
+    <!--    <link rel="stylesheet" href="static/css/chatbot_css.css">-->
+    <!--    <link rel="stylesheet" href="static/css/chatbox_css.css">-->
+    <link rel="stylesheet" href="{% static 'css/chatbot_css.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chatbox_css.css' %}">
+    <link rel="shortcut icon" href="#">
+
+    <meta charset="utf-8">
+    <meta name="keywords" content="Chatbot">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--    <script type="text/javascript" src="static/js/script.js"></script>-->
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1 style="padding-left: 70px;text-align:left;float:left;">Welcome to Django Chatbot</h1> 
+        <h2 style="padding-right: 70px;text-align:right;float:right;">
+            {% if user.is_authenticated %}
+              Hi {{ user.username }}!
+              <a class="login_out" href="{% url 'logout' %}">logout</a>
+            {% else %}
+              <a class="login_out" href="{% url 'login' %}">login</a>
+            {% endif %}
+
+        </h2> 
+    <hr style="clear:both;"/>
+    </header>
+
+
+
+    <main>
+        <div id="main_part_inner">
+            <!-- <div id="vertical_line" style="float: left; margin-left: 5%"></div>
+            <div id="vertical_line" style="float: left; margin-left: 8%"></div>
+            <div id="vertical_line" style="float: left; margin-left: 11%"></div>
+        -->
+            <div id="panel">
+                <h3>Search for registration card</h3>
+
+                <form class="search-panel">
+                    <input type="text" id="last_name" name="last_name" placeholder="Last Name">
+                    <input type="text" id="confirmation_num" name="confirmation_num" placeholder="Confirmation Number"> <br>
+                    <button type="button" id='search' onclick="search()" style="float:right; margin-right:12px;">Search</button>
+                    <p>result: <span id='result'></span></p>
+                </form>
+            </div>
+
+
+            <div id="animation">
+                <!-- <h2 >This part is a animation part.</h2> -->
+                <div class="video">
+                    <!-- 視訊型別為視訊和視訊路徑 -->
+                    <img id="guest_photo" src="{% static 'image/bot_image.png' %}" alt="guest photo">
+<!--                <video id="video" width="100%">-->
+<!--                   <source type="video/mp4" src="{% static 'video/bot.mp4' %}">-->
+<!--                </video>-->
+                </div>
+            </div>
+
+            <div id="document">
+                <!-- <h2>This part is a document part.</h2> -->
+                <!-- <img src="static/image/registration_card.png" alt="registration_card" style="max-height: 100%;">-->
+                <!--    <img src="{% static 'image/registration_card.png' %}" alt="registration_card" style="max-height: 100%;">-->
+                <div id="doc_container">
+                    <img id="logo" src="{% static 'image/logo.png' %}" alt="registration_card_logo">
+                    <form id="reg_card">
+                        <b>GUEST REGISTRATION CARD</b> <br>
+                        First name: <input class="reg_field_f" type="text" name="f_name" value="Sarah" tabindex="1" readonly>
+                        Last name: <input class="reg_field_f" type="text" name="l_name" value="Martin" tabindex="2" readonly> <br>
+                        Arrival Date: <input class="reg_field_f" type="text" name="a_date" value="24 Aug 2020" tabindex="3"
+                                             readonly>
+                        Departure Date: <input class="reg_field_f" type="text" name="d_date" value="27 Aug 2020" tabindex="4"
+                                               readonly> <br>
+                        Reservation No.: <input class="reg_field_f" type="text" name="res_no" value="240820" tabindex="5"
+                                                readonly>
+                        Room Type: <input class="reg_field_f" type="text" name="r_type" value="Deluxe" tabindex="6" size="10" readonly>
+                        Room Rate: $<input class="reg_field_f" type="text" name="r_rate" value="420" tabindex="7" size="10" readonly> <br>
+                        <hr style="margin-right:24px;">
+                        Address: <input class="reg_field" type="text" name="address" value="" tabindex="8">
+                        Country: <input class="reg_field" type="text" name="country" value="" tabindex="9">
+                        Zip Code: <input class="reg_field" type="text" name="zip" value="" size="10" tabindex="10"> <br>
+                        Phone: <input class="reg_field" type="text" name="phone" value="" tabindex="11">
+                        Email: <input class="reg_field" type="text" name="email" value="" tabindex="12"> <br>
+                        <hr style="margin-right:24px;">
+                        ID Number: <input class="reg_field" type="text" name="id_no" value="" tabindex="13">
+                        Nationality: <input class="reg_field" type="text" name="nationality" value="" tabindex="14">
+                        Date of Birth: <input class="reg_field" type="text" name="date_birth" value="" tabindex="15"> <br>
+                        Date of Issue: <input class="reg_field" type="text" name="date_issue" value="" tabindex="16">
+                        Date of Expiry: <input class="reg_field" type="text" name="date_expiry" value="" tabindex="17"> <br>
+
+                        <!--                Mode of payment:-->
+                        <!--                <input type="radio" name="payment" value="credit card"> Credit Card-->
+                        <!--                <input type="radio" name="payment" value="cash"> Cash-->
+                        <button type="submit" style="float:right; margin-right:12px;">Confirm</button>
+
+                    </form>
+                </div>
+            </div>
+
+            <section id="right_part" class="msger">
+                <header class="msger-header">
+                    <div class="msger-header-title">
+                        <i class="fas fa-comment-alt"></i> SimpleChat
+                    </div>
+                    <div class="msger-header-options">
+                        <span><i class="fas fa-cog"></i></span>
+                    </div>
+                </header>
+
+                <main class="msger-chat">
+                    <div class="msg left-msg">
+                        <div
+                                class="msg-img"
+                                style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+                        ></div>
+
+                        <div class="msg-bubble">
+                            <div class="msg-info">
+                                <div class="msg-info-name">BOT</div>
+                                <div class="msg-info-time">12:45</div>
+                            </div>
+
+                            <div class="msg-text">
+                                Hi, I am your practice partner.<br>From now on, I play your guest.😄
+                                <br><br><b>Comment:</b><br>
+                                1. /reset: to restart a new dialogue<br>
+                                2. /complete: to finalize and calculate your score
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+
+                <form class="msger-inputarea">
+                    <input type="text" class="msger-input" placeholder="Enter your message...">
+                    <button type="submit" class="msger-send-btn">Send</button>
+                    <button id="record" type="button" class="msger-send-btn" onclick="record()">Record</button>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>

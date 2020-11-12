@@ -1,0 +1,214 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% load static %}
+
+{% block link_meta_script %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'base/css/chatbox_css.css' %}">
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout_web.css' %}">
+    <!--    <link rel="stylesheet" href="static/css/chatbot_css.css">-->
+    <!--    <link rel="stylesheet" href="static/css/chatbox_css.css">-->
+    <link rel="shortcut icon" href="#">
+
+    <meta name="keywords" content="Chatbot Checkout">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock %}
+
+{% block header-title %} - Checkout{% endblock %}
+
+{% block header %}
+
+        <h2 style="padding-right: 70px;text-align:right;float:right;">
+            {% if user.is_authenticated %}
+              Hi {{ user.username }}!
+              <a class="login_out" href="{% url 'home' %}">Home</a>
+                {% if user.is_superuser or user.is_staff %}
+                  <a class="login_out" href="{% url 'admin:index' %}"> Panel</a>
+                {% endif %}
+
+              <a class="login_out" href="{% url 'logout' %}"> logout</a>
+
+            {% else %}
+              <a class="login_out" href="{% url 'home' %}">Home</a>
+              <a class="login_out" href="{% url 'login' %}">login</a>
+            {% endif %}
+
+        </h2>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div id="main_part_inner">
+            
+            <div id="panel">
+                <div style="margin-left:10px">
+                    <h3>Search for Stay</h3>
+                    <form id="search-panel" style="justify-content: space-between;">
+                        <p><input type="text" id="last_name" name="last_name" placeholder="Last Name" onchange="search()"></p>
+                        <p><input type="text" id="room_num" name="room_num" placeholder="Room Number" onchange="search()"></p>
+                    </form>
+                </div>
+            </div>
+
+
+            <div id="animation">
+                <img id="guest_photo" alt="guest photo">
+<!--                <video id="botVideo" width="100%" height="100%">-->
+<!--                    <source type="video/mp4" src="{% static 'video/chatbot.mp4' %}">-->
+<!--                </video>-->
+            </div>
+
+            <form id="document">
+                <div id="doc_container">
+                    <div id="dc1"><img id="doc_logo" src="{% static 'image/bill_logo.png' %}"  alt="registration_card_logo" style="height:100px;padding:5px"></div>
+                    <div id="dc2">TAX INVOICE</div>
+                    <div id="dc3">GST Registration No. MB-8100027-6</div>
+                    <div id="dc4">GUEST NAME :</div>
+                    <div id="dc5"><input type="text" name="g_name" value="" readonly size="14"></div>
+                    <div id="dc6">COMPANY :</div>
+                    <div id="dc7"><input type="text" name="company" value="" readonly size="14"></div>
+                    <div id="dc8">Address :</div>
+                    <div id="dc9"><input type="text" name="address" value="" size="14" readonly></div>
+                    <div id="dc10">FOLIO NO : </div>
+                    <div id="dc11"><input type="text" name="folio_no" value="INV2189" readonly size="14"></div>
+                    <div id="dc12">ROOM NO :</div>
+                    <div id="dc13"><input type="text" name="room_num" value="" size="14" readonly></div>
+                    <div id="dc14">ARRIVAL DATE :</div>
+                    <div id="dc15"><input type="text" name="a_date" value="26-Aug-20" readonly size="14"></div>
+                    <div id="dc16">DEPARTUTE DATE:</div>
+                    <div id="dc17"><input type="text" name="d_date" value="29-Aug-20" readonly size="14"> </div>
+                    <div id="dc18">NO OF ADULT/ CHILDREN :</div>
+                    <div id="dc19"><input type="text" name="a_c_num" value="1/0" size="14" readonly> </div>
+                    <div id="dc20">CASHIER ID :</div>
+                    <div id="dc21"><input type="text" name="cashier_id" value="LK" size="14" readonly></div>
+                    <div id="dc22">PAGE : </div>
+                    <div id="dc23"><input type="text" name="page" value="1" size="14" readonly></div>
+                    <div id="dc24">PRINT DATE :</div>
+                    <div id="dc25"><input type="text" name="p_date" value="29-Aug-20" size="14" readonly></div>
+                    <div id="dc26"><hr ></div>
+                    <div id="dc27">DATE</div>
+                    <div id="dc28">DESCRIPTION</div>
+                    <div id="dc29">REFERENCE</div>
+                    <div id="dc30">CHARGES (S$)</div>
+                    <div id="dc31">CREDIT (S$)</div>
+                    <div id="dc32"><hr></div>
+                    <div id="dc33"><input type="text" name="b_date1" value="29-Aug-20" size="14"></div>
+                    <div id="dc34"><input type="text" name="b_desc1" value="Accommodation Charge" size="50"></div>
+                    <div id="dc35"><input class="align_right" type="text" name="ac1" value="465.00" size="10"></div>
+                    <div id="dc36"><input type="text" name="b_date2" value="26-Aug-20" size="14"></div>
+                    <div id="dc37"><input type="text" name="b_desc2" value="Accommodation - Service Charge" size="50"></div>
+                    <div id="dc38"><input class="align_right" type="text" name="ac_sc1" value="46.50" size="10"></div>
+                    <div id="dc39"><input type="text" name="b_date3" value="26-Aug-20" size="14"></div>
+                    <div id="dc40"><input type="text" name="b_desc3" value="Accommodation Charge - GST" size="50"></div>
+                    <div id="dc41"><input class="align_right" type="text" name="ac_GST1" value="35.81" size="10"></div>
+                    <div id="dc42"><input type="text" name="b_date4" value="26-Aug-20" size="14"></div>
+                    <div id="dc43"><input type="text" name="b_desc4" value="Accommodation Charge" size="50"></div>
+                    <div id="dc44"><input class="align_right" type="text" name="ac2" value="465.00" size="10"></div>
+                    <div id="dc45"><input type="text" name="b_date5" value="27-Aug-20" size="14"></div>
+                    <div id="dc46"><input type="text" name="b_desc5" value="Accommodation - Service Charge" size="50"></div>
+                    <div id="dc47"><input class="align_right" type="text" name="ac_sc2" value="46.50" size="10"></div>
+                    <div id="dc48"><input type="text" name="b_date6" value="29-Aug-20" size="14"></div>
+                    <div id="dc49"><input type="text" name="b_desc6" value="Accommodation Charge - GST" size="50"></div>
+                    <div id="dc50"><input class="align_right" type="text" name="ac_GST2" value="35.81" size="10"></div>
+                    <div id="dc51"><input type="text" name="b_date7" value="29-Aug-20" size="14"></div>
+                    <div id="dc52"><input type="text" name="b_desc7" value="Accommodation Charge" size="50"></div>
+                    <div id="dc53"><input class="align_right" type="text" name="ac3" value="465.00" size="10"></div>
+                    <div id="dc54"><input type="text" name="b_date8" value="29-Aug-20" size="14"></div>
+                    <div id="dc55"><input type="text" name="b_desc8" value="Accommodation - Service Charge" size="50"></div>
+                    <div id="dc56"><input class="align_right" type="text" name="ac_sc3" value="46.50" size="10"></div>
+                    <div id="dc57"><input type="text" name="b_date9" value="29-Aug-20" size="14"></div>
+                    <div id="dc58"><input type="text" name="b_desc9" value="Accommodation Charge - GST" size="50"></div>
+                    <div id="dc59"><input class="align_right" type="text" name="ac_GST3" value="35.81" size="10"></div>
+                    <div id="dc60"><input type="text" name="b_date10" id="b_date10" value="" tabindex="14" size="14"></div>
+                    <div id="dc61"><select name="add_charge" id="add_charge" onchange="document.getElementById('add_qty').style.display='inline';document.getElementById('b_date10').value='29-Aug-20'">
+                            <option value="select">Additional Charge</option>
+                            <option value="2">Coke</option>
+                            <option value="2">Water</option>
+                            <option value="2">Coffee</option>
+                    </select>
+                    <input type="text" id="add_qty" name="add_qty" value="" size="5" placeholder="qty" style="display: none" onchange="calculateAddPrice()"></div>
+                    <div id="dc62"><input class="align_right" type="text" name="add_price" id="add_price" value="" size="10"></div>
+                    <div id="dc63"><hr ></div>
+                    <div id="dc64">Total </div>
+                    <div id="dc65"><input class="align_right" type="text" name="total" id="total" value="1709.82" size="10"></div>
+                    <div id="dc66">Balance Due</div>
+                    <div id="dc67"><input class="align_right" type="text" name="bal_due" id="bal_due" value="1709.82" size="10"></div>
+                    <div id="dc68"><hr ></div>
+                    <div id="dc69">Total Amount without taxes </div>
+                    <div id="dc70"><input class="align_right" type="text" name="total_no_GST" id="total_no_GST" value="1602.40" size="10"></div>
+                    <div id="dc71">Total GST</div>
+                    <div id="dc72"><input class="align_right" type="text" name="GST" id="GST" value="107.42" size="10"></div>
+                    <div id="dc73">Total Amount with GST</div>
+                    <div id="dc74"><input class="align_right" type="text" name="total_GST" id="total_GST" value="1709.82" size="10"></div>
+                    <div id="dc75"><p>I agree that my liability for this bill is not waived and agree to held personally liable in the event the indicated person, company or association fails</p></div>
+                    <div id="dc76"><p> to pay for any part of the full amount of these charges. Payment should be made payable to Institute of Techinical Education</p></div>
+                    <div id="dc77"><p></p></div>
+                    <div id="dc78"><input id='signature_block' type="text" name="signature" size="17" placeholder="Signature here" readonly style="border-bottom: 2px solid darkgray;"></div>
+                    <div id="dc79"> Guest Signature</div>
+                </div>
+            </form>
+
+            <div id="chat_box" class="msger">
+                <header class="msger-header">
+                    <div class="msger-header-title">
+                        <i class="fas fa-comment-alt"></i> SimpleChat
+                    </div>
+                    <div class="msger-header-options">
+                        <span><i class="fas fa-cog"></i></span>
+                    </div>
+                </header>
+
+                <main class="msger-chat">
+                    <div class="msg left-msg">
+                        <div
+                                class="msg-img"
+                                style="background-image: url(/static/base/image/msg_robot.svg)"
+                        ></div>
+
+                        <div class="msg-bubble">
+                            <div class="msg-info">
+                                <div class="msg-info-name">BOT</div>
+                                <div class="msg-info-time">12:45</div>
+                            </div>
+
+                            <div class="msg-text">
+                                Hi, I am your practice partner.<br>From now on, I play your guest.😄
+                                <br><br><b>Comment:</b><br>
+                                1. /reset: to restart a new dialogue<br>
+                                2. /complete: to finalize current dialogue and calculate your score
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+
+                <form class="msger-inputarea">
+                    <input type="text" class="msger-input" size="20" placeholder="Enter your message...">
+                    <button type="submit" class="msger-send-btn">Send</button>
+                    <button id="record" type="button" class="msger-send-btn" onclick="record()">Record</button>
+                </form>
+            </div>
+
+        </div>
+{% endblock %}
+
+{% block myscript %}
+
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--    <script type="text/javascript" src="static/js/script.js"></script>-->
+    <script type="text/javascript" src="{% static 'checkout/js/script.js' %}"></script>
+    {% if messages %}
+    <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+{% endblock %}

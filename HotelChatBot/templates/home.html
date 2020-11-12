@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Login{% endblock %}
+
+{% block header-title %} - Home{% endblock %}
+
+{% block header %}
+
+    <h2 style="padding-right: 70px;text-align:right;float:right;">
+          {% if user.is_authenticated %}
+              Hi {{ user.username }}!
+              <a class="login_out" href="{% url 'home' %}">Home</a>
+                {% if user.is_superuser or user.is_staff %}
+                  <a class="login_out" href="{% url 'admin:index' %}"> Panel</a>
+                {% endif %}
+
+              <a class="login_out" href="{% url 'logout' %}"> logout</a>
+
+          {% else %}
+              <a class="login_out" href="{% url 'login' %}">login</a>
+          {% endif %}
+    </h2>
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+ 
+  <div class="login-box">
+    <h2><a class="login_out" href="{% url 'checkin_main' %}">Check-in Task</a></h2>
+    <h2><a class="login_out" href="{% url 'checkout_main' %}">Checkout Task</a></h2>
+  </div>
+{% endblock %}

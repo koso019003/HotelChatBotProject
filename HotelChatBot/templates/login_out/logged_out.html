@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block title %}See you!{% endblock %}
+
+<!--{% block header-title %} - LogOut{% endblock %}-->
+
+{% block header %}
+
+    <h2 style="padding-right: 70px;text-align:right;float:right;">
+          <a class="login_out" href="{% url 'home' %}">Home</a>
+    </h2>
+
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="login-box">
+    <h2>Logged out</h2>
+    <p>You have been successfully logged out.</p>
+    <a href="{% url 'login' %}" class="login_out" style="text-align:right;float:right;padding-right: 20px;">Login</a> 
+
+      
+  </div>
+{% endblock %}

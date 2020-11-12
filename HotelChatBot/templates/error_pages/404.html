@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %} {% translate ' 404 Page not found' %}{% endblock %}
+
+{% block header-title %} - 404{% endblock %}
+
+{% block header %}
+
+    <h2 style="padding-right: 70px;text-align:right;float:right;">
+          <a class="login_out" href="{% url 'home' %}">Home</a>
+    </h2>
+
+{% endblock %}
+
+
+{% block content %}
+
+<p>{% translate 'We’re sorry, but the requested page could not be found.' %}</p>
+
+{% endblock %}

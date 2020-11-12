@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  {% load static %}
+
+  <title>Chatbot Demo {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'base/css/base_web.css' %}">
+
+  {% block link_meta_script %}{% endblock %}
+</head>
+<body>
+
+    <div class="header">
+        <h1 style="padding-left: 70px;text-align:left;float:left;">Welcome to Hotel West {% block header-title %}{% endblock %}</h1>
+
+        {% block header %}
+        {% endblock %}
+
+    <hr style="clear:both;"/>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block myscript %}
+    {% endblock %}
+
+</body>
+</html>

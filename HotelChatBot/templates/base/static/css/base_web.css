@@ -1,0 +1,38 @@
+
+html body{
+    /*color: ghostwhite;*/
+    /*position: fixed;*/
+    /*position: absolute;*/
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font-size: 80%;
+    font-family: sans-serif;
+}
+
+.header{
+    height:12vh;
+    background-color:darkred;
+    color: ghostwhite;
+}
+
+a.login_out{
+    /*text-align: right;*/
+    color: ghostwhite;
+    text-decoration: underline;
+}
+
+
+.login-box {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color:darkred;
+  /*transition: 0.3s;*/
+  color: ghostwhite;
+  width: 300px;
+  padding: 2px 2px 4px 20px;
+  top: 40%;
+  left: 40%;
+  position: absolute;
+  border-radius:2%;
+}

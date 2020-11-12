@@ -1,0 +1,9 @@
+[DEFAULT]
+
+PRIVATE_KEY_PATH = ../google.service.account.key/hotelcustomer-feac-f00520b9eefb.json
+PROJECT_ID = hotelcustomer-feac
+CHECKIN_PROJECT_ID = projects/hotelcustomer-pknx
+CHECKOUT_PROJECT_ID = projects/hotelcustomercheckout-e9tj
+
+LANGUAGE_CODE = en
+

@@ -1,0 +1,13 @@
+venv/
+
+HotelChatBot/db.sqlite3
+HotelChatBot/google.service.account.key/*
+!HotelChatBot/google.service.account.key/.gitkeep
+
+files/*
+!files/backup/
+files/backup/*
+!files/backup/*latest/
+
+.idea/
+**/__pycache__/

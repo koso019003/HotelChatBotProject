@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Login{% endblock %}
+
+{% block header-title %} - Login{% endblock %}
+
+{% block header %}
+
+    <h2 style="padding-right: 70px;text-align:right;float:right;">
+          <a class="login_out" href="{% url 'home' %}">Home</a>
+    </h2>
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+ 
+  <div class="login-box">
+    <h2>Login</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="float:right; margin-right:12px;">Login</button>
+      </form>
+  </div>
+{% endblock %}

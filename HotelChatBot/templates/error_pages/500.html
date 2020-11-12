@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %} {% translate ' 500 Internal Server Error' %}{% endblock %}
+
+{% block header-title %} - 500{% endblock %}
+
+{% block header %}
+
+    <h2 style="padding-right: 70px;text-align:right;float:right;">
+          <a class="login_out" href="{% url 'home' %}">Home</a>
+    </h2>
+
+{% endblock %}
+
+
+{% block content %}
+
+<p>{% translate 'We’re sorry, there are some problems with our server, we will fix it as soon as possible' %}</p>
+
+{% endblock %}
