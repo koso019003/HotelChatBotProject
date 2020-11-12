@@ -24,7 +24,7 @@ Follow by this document you will:
 First, clone the repository to your local machine:
 
 ```bash
-git clone ...
+git clone https://github.com/koso019003/HotelChatBotProject.git
 cd HotelChatBot
 ```
 
