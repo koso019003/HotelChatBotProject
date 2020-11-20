@@ -96,7 +96,7 @@ class CheckoutController(object):
         self.chatbot.set_showed_folio()
         self.evaluator.check_minibar(
             minibar_data=minibar_data,
-            minibar_items=self.chatbot.info.minibar_item_dict)
+            minibar_items=self.chatbot.info.minibar_item_add_qty_dict)
 
 
 def format_score(score_dict):

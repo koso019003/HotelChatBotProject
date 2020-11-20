@@ -7,13 +7,16 @@ const GUEST_PHOTO = [
   "/static/base/image/girl.png",
   "/static/base/image/boy.png",
 ];
-
+const GUEST_VIDEO = [
+  "/static/base/video/female.mp4",
+  "/static/base/video/male.mp4",
+];
 
 const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 const folioForm = get("#document");
-//const myVideo = get("#botVideo");
+const myVideo = get("#guest_video");
 const BOT_MSGS = [
   "Sorry, something wrong. I should leave now",
   "Bye",
@@ -69,7 +72,7 @@ $(document).ready(function(){
 
 msgerForm.addEventListener("submit", event => {
   event.preventDefault();
-
+  if (myVideo.paused) myVideo.play();
   const msgText = msgerInput.value;
 
   if (!msgText) return;
@@ -81,7 +84,6 @@ msgerForm.addEventListener("submit", event => {
     appendMessage(BOT_NAME, BOT_IMG, "left", 'Resetting...');
     setTimeout(reset, 800);
   }else{
-    //if (myVideo.paused){myVideo.play();}
     botResponse(msgText);
   }
 
@@ -98,7 +100,7 @@ folioForm.addEventListener("submit", event => {
   $.ajax({
         url: 'submit_bill/',
         type: 'post',
-        data: $('#minibar_bill').serialize(),
+        data: $('#document').serialize(),
         success: function(){
             alert("Submit!");
         },
@@ -159,6 +161,9 @@ function ready(){
     const x = random(0, 2);
 //    console.log(x);
     $('#guest_photo').attr('src',GUEST_PHOTO[x]);
+    var source = document.createElement('source');
+    source.setAttribute('src', GUEST_VIDEO[x]);
+    myVideo.appendChild(source);
     $.get("ready/", {'gender':x});
 }
 
@@ -306,26 +311,18 @@ function reset() {
     </div>
   `;
 
-    folioForm.elements["g_name"].value = "";
-    folioForm.elements["folio_no"].value = "";
-    folioForm.elements["room_num"].value = "";
-    folioForm.elements["a_date"].value = "";
-    folioForm.elements["d_date"].value = "";
-    folioForm.elements["a_c_num"].value = "";
-    folioForm.elements["cashier_id"].value = "";
-
-    folioForm.elements["page"].value = "";
-    folioForm.elements["p_date"].value = "";
-
-    folioForm.elements["signature"].value = "";
-
+    document.getElementById("output").innerHTML = "";
+    folioForm.reset();
     get("#search-panel").elements["last_name"].value = "";
     get("#search-panel").elements["room_num"].value = "";
 
     $('.reg_field').attr('readonly', false);
-
+    document.getElementById("result").innerHTML = "";
     document.getElementById("signature_block").style.borderColor  = "";
 
+    for (var i=1; i<10; i++){
+        document.getElementById("add_qty"+i).style.display = "none";
+    }
     ready();
 }
 
@@ -335,35 +332,110 @@ function search() {
     var room_num = $("#room_num").val();
 
     $.get("search/",{'last_name':last_name,'room_num':room_num}, function(ret){
-        $('#result').html(ret["result"])
+        //$('#result').html(ret["result"])
         console.info(ret)
         if (ret["result"] == "Find!"){
             folioForm.elements["g_name"].value = ret['full_name']
             folioForm.elements["folio_no"].value = ret['folio_no']
-            folioForm.elements["room_num"].value = ret['room_num']
+            folioForm.elements["room_no"].value = ret['room_num']
             folioForm.elements["a_date"].value = ret['a_date']
             folioForm.elements["d_date"].value = ret['d_date']
-            folioForm.elements["a_c_num"].value = ret['a_c_num']
+            folioForm.elements["a_c_no"].value = ret['a_c_num']
             folioForm.elements["cashier_id"].value = ret['cashier_id']
             folioForm.elements["page"].value = ret['page']
             folioForm.elements["p_date"].value = ret['print_date']
+            var num = 1;
+            var totalGST = 0;
+            var GST = 0;
+            var b_date = ret['a_date'];
+            for(var i=1; i<parseInt(ret['duration'])+1;i++){
+                folioForm.elements['b_date' + num].value = b_date;
+                folioForm.elements['b_desc' + num].value='Accommodation Charge';
+                num += 1;
+                folioForm.elements['b_date' + num].value = b_date;
+                folioForm.elements['b_desc' + num].value='Accommodation - Service Charge';
+                num += 1;
+                folioForm.elements['b_date' + num].value = b_date;
+                folioForm.elements['b_desc' + num].value='Accommodation Charge - GST';
+                num += 1;
+                folioForm.elements['ac' + i].value = parseFloat(ret['r_rate']).toFixed(2);
+                folioForm.elements['sc' + i].value = (parseFloat(ret['r_rate']) * 0.1).toFixed(2);
+                GST += parseFloat(ret['r_rate']) * 0.07;
+                folioForm.elements['GST' + i].value = (parseFloat(ret['r_rate'])*0.07).toFixed(2);
+                totalGST += parseFloat(ret['r_rate']) + parseFloat(ret['r_rate'])*0.1 + parseFloat(ret['r_rate'])*0.07;
+                b_date = ret['stay_'+(i+1)+'_date'];
+            }
 
+            folioForm.elements['total'].value = totalGST.toFixed(2);
+            folioForm.elements['bal_due'].value = totalGST.toFixed(2);
+            folioForm.elements['total_no_GST'].value = (totalGST - GST).toFixed(2);
+            folioForm.elements['GST'].value = GST.toFixed(2);
+            folioForm.elements['total_GST'].value = totalGST.toFixed(2);
         }
+        else
+            $('#result').html("Record NOT found. Please try again!");
     })
 }
 
-function calculateAddPrice(){
-    var addPrice = document.getElementById("add_charge").value;
-    var addQty = document.getElementById("add_qty").value;
-    var addTotal = addPrice * addQty;
-    document.getElementById("add_price").value = addTotal.toFixed(2);
-    var total = document.getElementById("total").value;
-    var totalGST = parseFloat(total) + parseFloat(addTotal);
-    var totalNoGST = totalGST/1.07;
-    document.getElementById("total").value = totalGST.toFixed(2);
-    document.getElementById("bal_due").value = totalGST.toFixed(2);
-    document.getElementById("total_no_GST").value = totalNoGST.toFixed(2);
-    document.getElementById("GST").value = (totalGST-totalNoGST).toFixed(2);
-    document.getElementById("total_GST").value = totalGST.toFixed(2);
+var addChargeList = [];
 
+function calculateAddPrice(itemNo, unitPrice){
+    var itemName = document.getElementById("minibar_item"+itemNo).value;
+    var addQty = parseInt(document.getElementById("add_qty"+itemNo).value);
+    var found = false;
+    for (var i=0; i<addChargeList.length; i++){
+        if (addChargeList[i].item == itemName) {
+            found = true;
+            addChargeList[i].qty = addQty;
+        }
+    }
+
+    if (!found){
+        var item = {item:itemName, qty:addQty, price:unitPrice};
+        addChargeList.push(item);
+    }
+}
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+    var addTotal = 0;
+    var output = "";
+    if (addChargeList.length>0){
+        for (var i=0; i<addChargeList.length; i++){
+            addTotal += addChargeList[i].qty * addChargeList[i].price;
+            output += addChargeList[i].item + " - S$" + addChargeList[i].price + " * " + addChargeList[i].qty + "<br>";
+        }
+        document.getElementById('b_date10').value=document.getElementById('p_date').value;
+        document.getElementById("output").innerHTML = output;
+        document.getElementById("add_price").value = addTotal.toFixed(2);
+        var totalGST = parseFloat(document.getElementById("total").value) + addTotal;
+        var totalNoGST = totalGST/1.07;
+        document.getElementById("total").value = totalGST.toFixed(2);
+        document.getElementById("bal_due").value = totalGST.toFixed(2);
+        document.getElementById("total_no_GST").value = totalNoGST.toFixed(2);
+        document.getElementById("GST").value = (totalGST-totalNoGST).toFixed(2);
+        document.getElementById("total_GST").value = totalGST.toFixed(2);
+    }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }

@@ -103,6 +103,7 @@ def stay_detail_search(request):
     return JsonResponse(parameters_dict)
 
 
+@csrf_exempt
 def submit_bill(request):
     checkout_controller = request.session.get('checkout_controller')
     request.session['checkout_controller'] = checkout_controller

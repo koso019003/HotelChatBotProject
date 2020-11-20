@@ -408,7 +408,7 @@ class ChatBot:
             response = random.choice(responses_true)
             response = {
                 'text': response,
-                'action': 'fill_credit_card_signature',
+                'action': 'fill_signature',
                 'params': {
                     'signature': self.info.full_name
                 }

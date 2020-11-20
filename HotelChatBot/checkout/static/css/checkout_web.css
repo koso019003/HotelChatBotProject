@@ -87,15 +87,15 @@
     /*line-height: 27px;*/
 }
 
-#term_doc{
-    /*
-    position:absolute;
-    height:30%;
-    z-index: 20;*/
-    width: 90%;
-    display: none;
+#doc_container{
+    background-color: white;
+    width: 100%;
+    height: auto;
+    /*border-radius:1%;*/
+    text-align: left;
+    line-height: 1em;
+    font-size: 100%;
 }
-
 
 #search-panel input[type=text] {
   width: 200px;
@@ -117,337 +117,343 @@
 
 button{
     font-size: 12px;
+    padding: 5px;
 }
 
 #doc_container{
     display: grid;
     grid-template-columns: 3% 15% 15% 15% 20% 15% 10% 3%;
-    grid-template-rows: 15% 1% 1% 1% 1% 2% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 1% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 1% 2% 2% 1% 1% 2% 1% 2% 1% 1% 1% 2% 1% 2% 1% 2% 2% 2% 1% 1% 1% 1% 5% 2% 2% 2%;
+    grid-row-gap: 0.2%;
+    grid-template-rows: 15% 3% 1% 2% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1% 1%;
 }
-
 
 #dc1 {
     grid-column: 4;
     grid-row: 1/2;
 }
 #dc2 {
-    grid-column: 6;
-    grid-row: 3/4;
+    grid-column: 6/7;
+    grid-row: 2/3;
 }
 #dc3 {
-    grid-column: 6/8;
-    grid-row: 5/6;
+    grid-column: 6/9;
+    grid-row: 3/4;
 }
 #dc4 {
     grid-column: 2/3;
-    grid-row: 7/8;
+    grid-row: 4/5;
 }
 #dc5 {
     grid-column: 3/4;
-    grid-row: 7/8;
+    grid-row: 4/5;
 }
 #dc6 {
     grid-column: 2/3;
-    grid-row: 9/10;
+    grid-row: 5/6;
 }
 #dc7 {
     grid-column: 3/4;
-    grid-row: 9/10;
+    grid-row: 5/6;
 }
 #dc8 {
     grid-column: 2/3;
-    grid-row: 11/12;
+    grid-row: 6/7;
 }
 #dc9 {
     grid-column: 3/4;
-    grid-row: 11/12;
+    grid-row: 6/7;
 }
 #dc10 {
     grid-column: 5/6;
-    grid-row: 7/8;
+    grid-row: 4/5;
 }
 #dc11 {
     grid-column: 6;
-    grid-row: 7/8;
+    grid-row: 4/5;
 }
 #dc12 {
     grid-column: 5/6;
-    grid-row: 9/10;
+    grid-row: 5/6;
 }
 #dc13 {
     grid-column: 6;
-    grid-row: 9/10;
+    grid-row: 5/6;
 }
 #dc14 {
     grid-column: 5/6;
-    grid-row: 11/12;
+    grid-row: 6/7;
 }
 #dc15 {
     grid-column: 6;
-    grid-row: 11/12;
+    grid-row: 6/7;
 }
 #dc16 {
     grid-column: 5/6;
-    grid-row: 13/14;
+    grid-row: 7/8;
 }
 #dc17 {
     grid-column: 6;
-    grid-row: 13/14;
+    grid-row: 7/8;
 }
 #dc18 {
     grid-column: 5/6;
-    grid-row: 15/16;
+    grid-row: 8/9;
 }
 #dc19 {
     grid-column: 6;
-    grid-row: 15/16;
+    grid-row: 8/9;
 }
 #dc20 {
     grid-column: 5/6;
-    grid-row: 17/18;
+    grid-row: 9/10;
 }
 #dc21 {
     grid-column: 6;
-    grid-row: 17/18;
+    grid-row: 9/10;
 }
 #dc22 {
     grid-column: 5/6;
-    grid-row: 19/20;
+    grid-row: 10/11;
 }
 #dc23 {
     grid-column: 6;
-    grid-row: 19/20;
+    grid-row: 10/11;
 }
 #dc24 {
     grid-column: 5/6;
-    grid-row: 21/22;
+    grid-row: 11/12;
 }
 #dc25 {
     grid-column: 6;
-    grid-row: 21/22;
+    grid-row: 11/12;
 }
 #dc26 {
     grid-column: 2/8;
-    grid-row: 23/24;
+    grid-row: 12/13;
 }
 #dc27 {
     grid-column: 2/3;
-    grid-row: 25/26;
+    grid-row: 13/14;
 }
 #dc28 {
     grid-column: 3/4;
-    grid-row: 25/26;
+    grid-row: 13/14;
 }
 #dc29 {
     grid-column: 4/5;
-    grid-row: 25/26;
+    grid-row: 13/14;
 }
 #dc30 {
     grid-column: 6/7;
-    grid-row: 25/26;
+    grid-row: 13/14;
 }
 #dc31 {
     grid-column: 7;
-    grid-row: 25/26;
+    grid-row: 13/14;
 }
 #dc32 {
     grid-column: 2/8;
-    grid-row: 27/28;
+    grid-row: 14/15;
 }
 #dc33 {
     grid-column: 2/3;
-    grid-row: 29/30;
+    grid-row: 15/16;
 }
 #dc34 {
     grid-column: 3/5;
-    grid-row: 29/30;
+    grid-row: 15/16;
 }
 #dc35 {
     grid-column: 6/7;
-    grid-row: 29/30;
+    grid-row: 15/16;
 }
 #dc36 {
     grid-column: 2/3;
-    grid-row: 31/32;
+    grid-row: 16/17;
 }
 #dc37 {
     grid-column: 3/5;
-    grid-row: 31/32;
+    grid-row: 16/17;
 }
 #dc38 {
     grid-column: 6/7;
-    grid-row: 31/32;
+    grid-row: 16/17;
 }
 #dc39 {
     grid-column: 2/3;
-    grid-row: 33/34;
+    grid-row: 17/18;
 }
 #dc40 {
     grid-column: 3/5;
-    grid-row: 33/34;
+    grid-row: 17/18;
 }
 #dc41 {
     grid-column: 6/7;
-    grid-row: 33/34;
+    grid-row: 17/18;   
 }
 #dc42 {
     grid-column: 2/3;
-    grid-row: 35/36;
+    grid-row: 18/19;
 }
 #dc43 {
     grid-column: 3/5;
-    grid-row: 35/36;
+    grid-row: 18/19;
 }
 #dc44 {
     grid-column: 6/7;
-    grid-row: 35/36;
+    grid-row: 18/19;
 }
 #dc45 {
     grid-column: 2/3;
-    grid-row: 37/38;
+    grid-row: 19/20;
 }
 #dc46 {
     grid-column: 3/5;
-    grid-row: 37/38;
+    grid-row: 19/20;
 }
 #dc47 {
     grid-column: 6/7;
-    grid-row: 37/38;
+    grid-row: 19/20;
 }
 #dc48 {
     grid-column: 2/3;
-    grid-row: 39/40;
+    grid-row: 21/22;
 }
 #dc49 {
     grid-column: 3/5;
-    grid-row: 39/40;
+    grid-row: 21/22;
 }
 #dc50 {
     grid-column: 6/7;
-    grid-row: 39/40;
+    grid-row: 21/22;   
 }
 #dc51 {
     grid-column: 2/3;
-    grid-row: 41/42;
+    grid-row: 22/23;
 }
 #dc52 {
     grid-column: 3/5;
-    grid-row: 41/42;
+    grid-row: 22/23;
 }
 #dc53 {
     grid-column: 6/7;
-    grid-row: 41/42;
+    grid-row: 22/23;
 }
 #dc54 {
     grid-column: 2/3;
-    grid-row: 43/44;
+    grid-row: 23/24;
 }
 #dc55 {
     grid-column: 3/5;
-    grid-row: 43/44;
+    grid-row: 23/24;
 }
 #dc56 {
     grid-column: 6/7;
-    grid-row: 43/44;
+    grid-row: 23/24;
 }
 #dc57 {
     grid-column: 2/3;
-    grid-row: 45/46;
+    grid-row: 24/25;
 }
 #dc58 {
     grid-column: 3/5;
-    grid-row: 45/46;
+    grid-row: 24/25;
 }
 #dc59 {
     grid-column: 6/7;
-    grid-row: 45/46;
+    grid-row: 24/25;   
 }
 #dc60 {
     grid-column: 2/3;
-    grid-row: 47/48;
+    grid-row: 25/26;
 }
 #dc61 {
-    grid-column: 3/5;
-    grid-row: 47/48;
+    grid-column: 3/6;
+    grid-row: 25/26;
 }
 #dc62 {
     grid-column: 6/7;
-    grid-row: 47/48;
+    grid-row: 25/26;   
 }
 #dc63 {
     grid-column: 2/8;
-    grid-row: 50/51;
+    grid-row: 26/27;
 }
 #dc64 {
     grid-column: 5/6;
-    grid-row: 52/53;
+    grid-row: 27/28;
 }
 #dc65 {
     grid-column: 6/7;
-    grid-row: 52/53;
+    grid-row: 27/28;
 }
 #dc66 {
     grid-column: 5/6;
-    grid-row: 54/55;
+    grid-row: 28/29;
 }
 #dc67 {
     grid-column: 6/7;
-    grid-row: 54/55;
+    grid-row: 28/29;
 }
 #dc68 {
     grid-column: 2/8;
-    grid-row: 56/57;
+    grid-row: 29/30;
 }
 #dc69 {
     grid-column: 5/6;
-    grid-row: 58/59;
+    grid-row: 30/31;
 }
 #dc70 {
     grid-column: 6/7;
-    grid-row: 58/59;
+    grid-row: 30/31;
 }
 #dc71 {
     grid-column: 5/6;
-    grid-row: 60/61;
+    grid-row: 31/32;
 }
 #dc72 {
     grid-column: 6/7;
-    grid-row: 60/61;
+    grid-row: 31/32;
 }
 #dc73 {
     grid-column: 5/6;
-    grid-row: 62/63;
+    grid-row: 32/33;
 }
 #dc74 {
     grid-column: 6/7;
-    grid-row: 62/63;
+    grid-row: 32/33;
 }
 #dc75 {
-    grid-column: 2/8 ;
-    grid-row: 64/65;
+    grid-column: 2/8;
+    grid-row: 33/34;
 }
 #dc76 {
     grid-column: 2/8;
-    grid-row: 66/67;
+    grid-row: 34/35;
 }
 #dc77 {
     grid-column: 2/8;
-    grid-row: 68/69;
+    grid-row: 35/36;
 }
 #dc78 {
     grid-column: 2/4;
-    grid-row: 70/71;
+    grid-row: 36/37;
 }
 #dc79 {
     grid-column: 2/4;
-    grid-row: 72/73;
+    grid-row: 37/38;
+}
+#dc80 {
+    grid-column: 7;
+    grid-row: 36/37;
 }
 
 #document input {
     border: none;
     border-bottom: 2px solid darkgray;
-    padding: 5px 20px 5px 40px;
+    /*padding: 5px 20px 5px 40px;*/
 }
+
 #signature_block:focus {
     outline: none;
 }
@@ -461,4 +467,44 @@ button{
 }
 .align_right{
     text-align: right;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  font-size: 90%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }

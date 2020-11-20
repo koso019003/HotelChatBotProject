@@ -8,12 +8,16 @@ const GUEST_PHOTO = [
   "/static/base/image/girl.png",
   "/static/base/image/boy.png",
 ];
+const GUEST_VIDEO = [
+  "/static/base/video/female.mp4",
+  "/static/base/video/male.mp4",
+];
 
 const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 const regForm = get("#reg_card");
-//const myVideo = get("#botVideo");
+const myVideo = get("#guest_video");
 const BOT_MSGS = [
   "Sorry, something wrong. I should leave now",
   "Bye",
@@ -63,11 +67,13 @@ $(document).ready(function(){
   });
   ready();
   $('#guest_photo').show();
+  //$('#guest_video').show();
 });
 
 
 msgerForm.addEventListener("submit", event => {
   event.preventDefault();
+  if (myVideo.paused) myVideo.play();
 
   const msgText = msgerInput.value;
 
@@ -80,7 +86,6 @@ msgerForm.addEventListener("submit", event => {
     appendMessage(BOT_NAME, BOT_IMG, "left", 'Resetting...');
     setTimeout(reset, 800);
   }else{
-    //if (myVideo.paused){myVideo.play();}
     botResponse(msgText);
   }
 
@@ -115,6 +120,9 @@ function ready(){
     const x = random(0, 2);
 //    console.log(x);
     $('#guest_photo').attr('src',GUEST_PHOTO[x]);
+    var source = document.createElement('source');
+    source.setAttribute('src', GUEST_VIDEO[x]);
+    myVideo.appendChild(source);
     $.get("ready/", {'gender':x});
 }
 
@@ -341,7 +349,7 @@ function reset() {
     get("#search-panel").elements["confirmation_num"].value = "";
 
     $('.reg_field').attr('readonly', false);
-
+    document.getElementById("result").innerHTML = "";
     document.getElementById("signature_block").style.borderColor  = "";
 
     ready();
@@ -379,6 +387,8 @@ function search() {
             regForm.elements["r_type"].value = ret['r_type']
             regForm.elements["r_rate"].value = ret['r_rate']
         }
+        else
+            $('#result').html("Record NOT found. Please try again!");
     })
 }
 

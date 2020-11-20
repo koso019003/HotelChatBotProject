@@ -53,16 +53,15 @@
                     <form id="search-panel" style="justify-content: space-between;">
                         <p><input type="text" id="last_name" name="last_name" placeholder="Last Name" onchange="search()"></p>
                         <p><input type="text" id="confirmation_num" name="confirmation_num" placeholder="Confirmation Number" onchange="search()"></p>
+                        <p id="result"></p>
                     </form>
                 </div>
             </div>
 
 
             <div id="animation">
-                <img id="guest_photo" alt="guest photo">
-<!--                <video id="botVideo" width="100%" height="100%">-->
-<!--                    <source type="video/mp4" src="{% static 'video/chatbot.mp4' %}">-->
-<!--                </video>-->
+                <!--<img id="guest_photo" alt="guest photo">-->
+                <video id="guest_video" width="100%" height="100%"></video>
             </div>
 
             <div id="document">
