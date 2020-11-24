@@ -256,7 +256,7 @@ class ChatBot:
         if self.info.use_minibar:
             num_items = len(self.info.minibar_item_dict.keys())
             if num_items == 1:
-                items = self.info.minibar_item_dict.keys()[0]
+                items = '{}'.format(*self.info.minibar_item_dict.keys())
             elif num_items == 2:
                 items = '{} and {}'.format(*self.info.minibar_item_dict.keys())
             elif num_items == 3:
